@@ -50,7 +50,6 @@ public class PhonebookController
             }
             catch(Exception e)
             {
-                System.out.println("post - exception: " + e.getMessage());
                 return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
             }
         }
