@@ -3,8 +3,6 @@ package com.linecorp.example.springphonebook;
 
 import java.io.IOException;
 import java.util.List;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,14 +39,12 @@ public class PhonebookController
     
     @RequestMapping(value="/phonebook", method=RequestMethod.POST)
     public ResponseEntity<String> post(
-        @RequestBody String aPayload)
+        @RequestBody Person aPayload)
     {
         if(aPayload!=null && aPayload.length() > 0)
         {
             try
             {
-                System.out.println("post - payload: " + aPayload);
-                Person p=new GsonBuilder().create().fromJson(aPayload, Person.class);
                 Long id=mDao.post(p);
                 return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id, HttpStatus.OK);
             }
