@@ -47,12 +47,14 @@ public class PhonebookController
         {
             try
             {
+                System.out.println("post - payload: " + aPayload);
                 Person p=new GsonBuilder().create().fromJson(aPayload, Person.class);
                 Long id=mDao.post(p);
                 return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id, HttpStatus.OK);
             }
             catch(Exception e)
             {
+                System.out.println("post - exception: " + e.getMessage());
                 return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
             }
         }
