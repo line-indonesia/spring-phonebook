@@ -46,7 +46,7 @@ public class PhonebookController
             try
             {
                 Long id=mDao.post(aPayload);
-                return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id, HttpStatus.OK);
+                return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id+"}", HttpStatus.OK);
             }
             catch(Exception e)
             {
