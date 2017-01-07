@@ -48,6 +48,6 @@ dependencies
 	compile('org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE')
 	compile('org.springframework:spring-jdbc:4.3.5.RELEASE')
 	compile('org.postgresql:postgresql:9.4.1212')
-	compile('com.google.guava:guava:20.0')
+	compile('com.google.code.gson:gson:2.8.0')
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat:1.4.3.RELEASE')
 }

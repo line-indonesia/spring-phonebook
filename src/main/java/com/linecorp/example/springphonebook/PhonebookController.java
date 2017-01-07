@@ -3,8 +3,9 @@ package com.linecorp.example.springphonebook;
 
 import java.io.IOException;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.google.common.io.ByteStreams;
+import com.linecorp.example.springphonebook.model.Person;
 
 @RestController
 @RequestMapping(value="/")
@@ -22,17 +23,43 @@ public class PhonebookController
     PersonDao mDao;
     
     @RequestMapping(value="/phonebook", method=RequestMethod.GET)
-    public ResponseEntity<String> get(
+    public ResponseEntity< List<Person> > get(
         @RequestParam(value="name", required=false) String aName)
     {
-        return null;
+        List<Person> pl=null;
+        if(aName!=null && aName.length() > 0)
+        {
+            pl=mDao.getByName(aName);
+        }
+        else
+        {
+            pl=mDao.get();
+        }
+        
+        return new ResponseEntity< List<Person> >(pl, HttpStatus.OK);
     }
     
     @RequestMapping(value="/phonebook", method=RequestMethod.POST)
     public ResponseEntity<String> post(
         @RequestBody String aPayload)
     {
-        return null;
+        if(aPayload!=null && aPayload.length() > 0)
+        {
+            try
+            {
+                Person p=new GsonBuilder().create().fromJson(aPayload, Person.class);
+                Long id=mDao.post(p);
+                return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id, HttpStatus.OK);
+            }
+            catch(Exception e)
+            {
+                return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        else
+        {
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 };
