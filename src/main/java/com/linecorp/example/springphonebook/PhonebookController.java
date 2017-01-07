@@ -41,11 +41,11 @@ public class PhonebookController
     public ResponseEntity<String> post(
         @RequestBody Person aPayload)
     {
-        if(aPayload!=null && aPayload.length() > 0)
+        if(aPayload!=null)
         {
             try
             {
-                Long id=mDao.post(p);
+                Long id=mDao.post(aPayload);
                 return new ResponseEntity<String>("{\"status\":\"OK\", \"id\":"+id, HttpStatus.OK);
             }
             catch(Exception e)
