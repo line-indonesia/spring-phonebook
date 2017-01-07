@@ -17,7 +17,7 @@ import com.linecorp.example.springphonebook.model.Person;
 public class PersonDaoImpl implements PersonDao
 {
     private final static String SQL_SELECT_ALL="SELECT id, name, phone_number FROM phonebook";
-    private final static String SQL_GET_BY_NAME=SQL_SELECT_ALL + " WHERE LOWER(name) LIKE LOWER(?) ORDER BY name";
+    private final static String SQL_GET_BY_NAME=SQL_SELECT_ALL + " WHERE LOWER(name) LIKE LOWER(?);";
     
     private JdbcTemplate mJdbc;
     
@@ -81,6 +81,6 @@ public class PersonDaoImpl implements PersonDao
 
     public List<Person> getByName(String aName)
     {
-        return mJdbc.query(SQL_GET_BY_NAME, new Object[]{aName}, MULTIPLE_RS_EXTRACTOR);
+        return mJdbc.query(SQL_GET_BY_NAME, new Object[]{"%"+aName+"%"}, MULTIPLE_RS_EXTRACTOR);
     }
 };
