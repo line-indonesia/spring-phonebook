@@ -15,4 +15,9 @@ public class Person
         name=aName;
         phoneNumber=aPhoneNumber;
     }
+    
+    public Person()
+    {
+        
+    }
 };
