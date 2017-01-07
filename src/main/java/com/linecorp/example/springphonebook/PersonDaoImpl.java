@@ -69,8 +69,8 @@ public class PersonDaoImpl implements PersonDao
             .withTableName("phonebook")
             .usingGeneratedKeyColumns("id");
         Map<String, Object> fields=new HashMap<String, Object>();
-        fields.put("name", aPerson.mName);
-        fields.put("phone_number", aPerson.mPhoneNumber);
+        fields.put("name", aPerson.name);
+        fields.put("phone_number", aPerson.phoneNumber);
         return insert.executeAndReturnKey(fields).longValue();
     }
 

@@ -1,23 +1,18 @@
 
 package com.linecorp.example.springphonebook.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Person
 {
-    @SerializedName("id")
-    public Long mId;
+    public Long id;
     
-    @SerializedName("name")
-    public String mName;
+    public String name;
     
-    @SerializedName("phone_number")
-    public String mPhoneNumber;
+    public String phoneNumber;
     
     public Person(Long aId, String aName, String aPhoneNumber)
     {
-        mId=aId;
-        mName=aName;
-        mPhoneNumber=aPhoneNumber;
+        id=aId;
+        name=aName;
+        phoneNumber=aPhoneNumber;
     }
 };
