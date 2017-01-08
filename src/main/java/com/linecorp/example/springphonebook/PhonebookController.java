@@ -6,11 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.linecorp.example.springphonebook.model.Person;
 
 @RestController
@@ -20,7 +16,7 @@ public class PhonebookController
     @Autowired
     PersonDao mDao;
     
-    @RequestMapping(value="/phonebook", method=RequestMethod.GET)
+    @GetMapping(value="/phonebook")
     public ResponseEntity< List<Person> > get(
         @RequestParam(value="name", required=false) String aName)
     {
@@ -37,7 +33,7 @@ public class PhonebookController
         return new ResponseEntity< List<Person> >(pl, HttpStatus.OK);
     }
     
-    @RequestMapping(value="/phonebook", method=RequestMethod.POST)
+    @PostMapping(value="/phonebook")
     public ResponseEntity<String> post(
         @RequestBody Person aPayload)
     {
