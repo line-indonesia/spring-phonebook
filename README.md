@@ -4,6 +4,23 @@ This repository demonstrates how to create a basic web application using Spring 
 
 ### How do I get set up? ###
 
+* Open Heroku Postgres
+
+	```bash
+	$ heroku psql
+	```
+
+* Prepare `phonebook` table
+
+	```sql
+	CREATE TABLE IF NOT EXISTS phonebook
+	(
+		id BIGSERIAL PRIMARY KEY,
+		name TEXT,
+		phone_number TEXT
+	);
+	```	
+
 * Compile
  
     ```bash
@@ -21,15 +38,19 @@ This repository demonstrates how to create a basic web application using Spring 
     $ heroku ps:scale web=1
     ```
 
-* Use  
-    By default the server will serve at:
-    > http://\<your\_heroku\_endpoint\>:8080/
+* Use
     
     You can get the list of the people in the phonebook by calling:
-    > http://\<your\_heroku\_endpoint\>:8080/phonebook/
+    > https://\<your\_heroku\_endpoint\>/phonebook/
     
     You can search a name from the phonebook by calling:
-    > http://\<your\_heroku\_endpoint\>:8080/phonebook?name=\<name\_to\_search\>
+    > https://\<your\_heroku\_endpoint\>/phonebook?name=\<name\_to\_search\>
+    
+    You can add new record to the phonebook by sending POST request like the following:
+    
+    ```bash
+	$ curl -X POST -d'{ "name":"Sally", "phoneNumber":"909090" }' -H "Content-Type: application/json;charset=UTF-8" https://<your_heroku_endpoint>/phonebook/
+	```
 
 
 ### How do I contribute? ###
